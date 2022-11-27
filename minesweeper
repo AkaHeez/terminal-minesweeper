@@ -1,0 +1,52 @@
+import mineL
+boardList = []
+#create list 0 - 80
+for i in range(81):
+    boardList.append(0)
+
+posDict = { 'a1' : 0, 'a2' : 1, 'a3' : 2, 'a4' : 3, 'a5' : 4, 'a6' : 5, 'a7' : 6, 'a8' : 7, 'a9' : 8, 'b1' : 9, 'b2' : 10, 'b3' : 11, 'b4' : 12, 'b5' : 13, 'b6' : 14, 'b7' : 15, 'b8' : 16, 'b9' : 17, 'c1' : 18, 'c2' : 19, 'c3' : 20, 'c4' : 21, 'c5' : 22, 'c6' : 23, 'c7' : 24, 'c8' : 25, 'c9' : 26, 'd1' : 27, 'd2' : 28, 'd3' : 29, 'd4' : 30, 'd5' : 31, 'd6' : 32, 'd7' : 33, 'd8' : 34, 'd9' : 35, 'e1' : 36, 'e2' : 37, 'e3' : 38, 'e4' : 39, 'e5' : 40, 'e6' : 41, 'e7' : 42, 'e8' : 43, 'e9' : 44, 'f1' : 45, 'f2' : 46, 'f3' : 47, 'f4' : 48, 'f5' : 49, 'f6' : 50, 'f7' : 51, 'f8' : 52, 'f9' : 53, 'g1' : 54, 'g2' : 55, 'g3' : 56, 'g4' : 57, 'g5' : 58, 'g6' : 59, 'g7' : 60, 'g8' : 61, 'g9' : 62, 'h1' : 63, 'h2' : 64, 'h3' : 65, 'h4' : 66, 'h5' : 67, 'h6' : 68, 'h7' : 69, 'h8' : 70, 'h9' : 71, 'i1' : 72, 'i2' : 73, 'i3' : 74, 'i4' : 75, 'i5' : 76, 'i6' : 77, 'i7' : 78, 'i8' : 79, 'i9' : 80, }
+places_dug = set()
+
+
+mines_added = mineL.add_mines(boardList)
+mineL.assign_values(boardList)
+#mineL.draw_answer(boardList)#, my cheat
+
+while True:
+    mineL.clear()
+    mineL.draw_board(boardList, places_dug)
+    guess = input("Position? ex. 'a1' 'g2' ")
+    guess = posDict[guess]
+    if mineL.check_guess(guess, boardList, places_dug): #return true if you did not lose
+        if len(places_dug) >= 80 - mines_added:
+            mineL.draw_answer(boardList)
+            print("You Won! Congrats!")
+            again = input("Would you like to play again? (Y/N) ").lower()
+            if again in ["n", "no"]:
+                break
+            #reset places dug
+            places_dug = set()
+            #reset board
+            boardList = []
+            for i in range(81):
+                boardList.append(0)
+            #rest mines
+            mines_added = mineL.add_mines(boardList)
+            mineL.assign_values(boardList)
+    else:
+        mineL.draw_answer(boardList)
+        print("BOOM! You lost! It was a mine!")
+        again = input("Would you like to play again? (Y/N) ").lower()
+        if again in ["n", "no"]:
+            break
+        #reset places dug
+        places_dug = set()
+        #reset board
+        boardList = []
+        for i in range(81):
+            boardList.append(0)
+        #rest mines
+        mines_added = mineL.add_mines(boardList)
+        mineL.assign_values(boardList)
+
+

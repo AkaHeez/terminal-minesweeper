@@ -1,0 +1,203 @@
+import random
+import os
+def clear():
+    os.system("cls")
+
+
+def draw_board(realList, places_dug):
+    #have to copy board
+    boardList = realList.copy()
+    #hides the mines and the numbers
+    for i in range (81):
+        if i not in places_dug:
+            boardList[i] = "-"
+    
+    #prints out the board
+    print(f"""  
+         1       2       3       4       5       6       7       8       9
+      _______________________________________________________________________
+     |       |       |       |       |       |       |       |       |       |
+  a  |   {boardList[0]}   |   {boardList[1]}   |   {boardList[2]}   |   {boardList[3]}   |   {boardList[4]}   |   {boardList[5]}   |   {boardList[6]}   |   {boardList[7]}   |   {boardList[8]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  b  |   {boardList[9]}   |   {boardList[10]}   |   {boardList[11]}   |   {boardList[12]}   |   {boardList[13]}   |   {boardList[14]}   |   {boardList[15]}   |   {boardList[16]}   |   {boardList[17]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  c  |   {boardList[18]}   |   {boardList[19]}   |   {boardList[20]}   |   {boardList[21]}   |   {boardList[22]}   |   {boardList[23]}   |   {boardList[24]}   |   {boardList[25]}   |   {boardList[26]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  d  |   {boardList[27]}   |   {boardList[28]}   |   {boardList[29]}   |   {boardList[30]}   |   {boardList[31]}   |   {boardList[32]}   |   {boardList[33]}   |   {boardList[34]}   |   {boardList[35]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  e  |   {boardList[36]}   |   {boardList[37]}   |   {boardList[38]}   |   {boardList[39]}   |   {boardList[40]}   |   {boardList[41]}   |   {boardList[42]}   |   {boardList[43]}   |   {boardList[44]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  f  |   {boardList[45]}   |   {boardList[46]}   |   {boardList[47]}   |   {boardList[48]}   |   {boardList[49]}   |   {boardList[50]}   |   {boardList[51]}   |   {boardList[52]}   |   {boardList[53]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  g  |   {boardList[54]}   |   {boardList[55]}   |   {boardList[56]}   |   {boardList[57]}   |   {boardList[58]}   |   {boardList[59]}   |   {boardList[60]}   |   {boardList[61]}   |   {boardList[62]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  h  |   {boardList[63]}   |   {boardList[64]}   |   {boardList[65]}   |   {boardList[66]}   |   {boardList[67]}   |   {boardList[68]}   |   {boardList[69]}   |   {boardList[70]}   |   {boardList[71]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  i  |   {boardList[72]}   |   {boardList[73]}   |   {boardList[74]}   |   {boardList[75]}   |   {boardList[76]}   |   {boardList[77]}   |   {boardList[78]}   |   {boardList[79]}   |   {boardList[80]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     """)
+
+#shows board with mines
+def draw_answer(realList):
+    #have to copy board
+    boardList = realList.copy()
+    #prints out the board
+    print(f"""  
+         1       2       3       4       5       6       7       8       9
+      _______________________________________________________________________
+     |       |       |       |       |       |       |       |       |       |
+  a  |   {boardList[0]}   |   {boardList[1]}   |   {boardList[2]}   |   {boardList[3]}   |   {boardList[4]}   |   {boardList[5]}   |   {boardList[6]}   |   {boardList[7]}   |   {boardList[8]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  b  |   {boardList[9]}   |   {boardList[10]}   |   {boardList[11]}   |   {boardList[12]}   |   {boardList[13]}   |   {boardList[14]}   |   {boardList[15]}   |   {boardList[16]}   |   {boardList[17]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  c  |   {boardList[18]}   |   {boardList[19]}   |   {boardList[20]}   |   {boardList[21]}   |   {boardList[22]}   |   {boardList[23]}   |   {boardList[24]}   |   {boardList[25]}   |   {boardList[26]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  d  |   {boardList[27]}   |   {boardList[28]}   |   {boardList[29]}   |   {boardList[30]}   |   {boardList[31]}   |   {boardList[32]}   |   {boardList[33]}   |   {boardList[34]}   |   {boardList[35]}   |
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  e  |   {boardList[36]}   |   {boardList[37]}   |   {boardList[38]}   |   {boardList[39]}   |   {boardList[40]}   |   {boardList[41]}   |   {boardList[42]}   |   {boardList[43]}   |   {boardList[44]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  f  |   {boardList[45]}   |   {boardList[46]}   |   {boardList[47]}   |   {boardList[48]}   |   {boardList[49]}   |   {boardList[50]}   |   {boardList[51]}   |   {boardList[52]}   |   {boardList[53]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  g  |   {boardList[54]}   |   {boardList[55]}   |   {boardList[56]}   |   {boardList[57]}   |   {boardList[58]}   |   {boardList[59]}   |   {boardList[60]}   |   {boardList[61]}   |   {boardList[62]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  h  |   {boardList[63]}   |   {boardList[64]}   |   {boardList[65]}   |   {boardList[66]}   |   {boardList[67]}   |   {boardList[68]}   |   {boardList[69]}   |   {boardList[70]}   |   {boardList[71]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     |       |       |       |       |       |       |       |       |       |
+  i  |   {boardList[72]}   |   {boardList[73]}   |   {boardList[74]}   |   {boardList[75]}   |   {boardList[76]}   |   {boardList[77]}   |   {boardList[78]}   |   {boardList[79]}   |   {boardList[80]}   |    
+     |_______|_______|_______|_______|_______|_______|_______|_______|_______|
+     """)
+
+
+def add_mines(boardlist):
+   mines_added = 0
+   mines = random.randint(10,15) #10,15
+   while mines_added < mines:#how many mines it will place
+      rn = random.randint(0, 80) #random mine placed in 0-80 pos, 80 because 0 is is a number in the list
+      if boardlist[rn] == "X": #checking for repeats
+         continue
+      boardlist[rn] = "X"
+      mines_added +=1
+   return mines
+
+
+
+def assign_values(boardlist):
+   for i in range(81):
+      if boardlist[i] == "X":
+         continue #is a mine just skip it
+      boardlist[i] = neighboring_mines(i, boardlist)
+
+def neighboring_mines(rn, boardlist):
+   neighbors = 0
+   if rn in [80, 71, 62, 53 , 44, 35, 26, 17, 8]:
+      #if on the right side, only add left side
+      for surrounding in [9, -9, -1, -10, 8]:
+         if boardlist[max(0, min(80, rn + surrounding))] == "X":
+            if (rn + surrounding) > 80 or (rn + surrounding) < 0:
+               continue
+            neighbors += 1
+   #if on left side, only add right side
+   elif rn in [0, 9, 18, 27, 36, 45, 54, 63, 72]:
+      for surrounding in [9, -9, 1, 10, -8]:
+         if boardlist[max(0, min(80, rn + surrounding))] == "X":
+            if (rn + surrounding) > 80 or (rn + surrounding) < 0:
+               continue
+            neighbors += 1
+   else:
+      for surrounding in [9, -9, 1, -1, 10, -10, 8, -8]:           
+         if boardlist[max(0, min(80, rn + surrounding))] == "X":
+            if (rn + surrounding) > 80 or (rn + surrounding) < 0:
+               continue
+            neighbors += 1
+   return neighbors
+
+
+def check_guess(guess, boardlist, places_dug):
+   if boardlist[guess] == "X": #if bomb then activate loss
+      return False
+   else: #not a bomb
+      places_dug.add(guess) 
+      if boardlist[guess] == 0:  #if location is 0
+         if guess in [80, 71, 62, 53 , 44, 35, 26, 17, 8]:
+            for surrounding in [9, -9, -1, -10, 8]:
+               if (guess + surrounding) > 80 or (guess + surrounding) < 0:
+                     continue
+               pos = max(0, min(80, guess + surrounding)) #the current surronding location of the mine, for ex. the mine above mine #80 would be mine #71, then location will be #71
+               if boardlist[pos] == 0 and pos not in places_dug: #if the location is 0 and the position has not been dug yet, then we dig then
+                  check_guess(pos, boardlist, places_dug) #we dig recusrively untill we run into a bomb a square that is greater than 0
+               else:
+                  places_dug.add(pos) #if the square is not a 0 then we just add it to the places dug, then it will show all the places that the player has dug so far
+         elif guess in [0, 9, 18, 27, 36, 45, 54, 63, 72]:
+            for surrounding in [9, -9, 1, 10, -8]:
+               if (guess + surrounding) > 80 or (guess + surrounding) < 0:
+                  continue
+               pos = max(0, min(80, guess + surrounding))
+               if boardlist[pos] == 0 and pos not in places_dug:
+                  check_guess(pos, boardlist, places_dug)
+               else:
+                  places_dug.add(pos)
+         else:
+            for surrounding in [9, -9, 1, -1, 10, -10, 8, -8]: 
+               if (guess + surrounding) > 80 or (guess + surrounding) < 0:
+                  continue
+               pos = max(0, min(80, guess + surrounding))          
+               if boardlist[pos] == 0 and pos not in places_dug:
+                  check_guess(pos, boardlist, places_dug)
+               else:
+                  places_dug.add(pos)
+      return True
+
+
+
+            
+        
+        
+        
+        
+
+
+
+
+'''boardlist[a+9] += 1#adds one to the square under if bomb
+boardlist[a-9] += 1#add one to above
+boardlist[a+1] += 1#add one to right
+boardlist[a-1] += 1#add one to left
+boardlist[a+10] += 1 #bot right
+boardlist[a-10] += 1 #top left
+boardlist[a+8] += 1 #bot left
+boardlist[a-8] += 1 #top right
+
+
+'''
+
+
+
+
+
+
+###NOT IMPORTANT, but cool, i drew the board like this
+'''
+j = 0
+letters = ("abcdefghi")
+for i in range(9):
+    z = letters[i]
+    print("     |       |       |       |       |       |       |       |       |       |")
+    print("  "+ z +"  |   {boardList[" + str(j) + "]}   |   {boardList[" + str(j+1) + "]}   |   {boardList[" + str(j+2) + "]}   |   {boardList[" + str(j+3) + "]}   |   {boardList[" + str(j+4) + "]}   |   {boardList[" + str(j+5) + "]}   |   {boardList[" + str(j+6) + "]}   |   {boardList[" + str(j+7) + "]}   |   {boardList[" + str(j+8) + "]}   |")
+    print("     |_______|_______|_______|_______|_______|_______|_______|_______|_______|")
+    j+=9
+    '''
